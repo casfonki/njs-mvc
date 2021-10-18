@@ -1,14 +1,15 @@
 
 const fs = require('fs')
 
-class Controller {
 
+class Controller {
+    
     constructor(req,res)
     {
         this.request = req;
-        
+     
         this.response = res;
-        
+
     }
     
 
@@ -23,6 +24,8 @@ class Controller {
         this.response.write(data);
         this.response.end();
     }
+
+    
 }
 
 module.exports  = {Controller}

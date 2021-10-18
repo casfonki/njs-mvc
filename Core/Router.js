@@ -3,14 +3,36 @@
 
 const route = (req,res) => 
 {
+    
     var url = req.originalUrl;
+    console.log(url);
+    console.log(url.match("/(.)(\w+)$/gi"));
+    if(url == "/")
+    {
+        
+    var controller = require("../Controller/MainController")["default"]
+    controller = new controller(req,res);
+ 
+    controller["actionIndex"]();
+    return;
+    }
     var controller = url.split("/")[1];
-    var action = url.split("/")[2].split("?")[0];
-    console.log(url.split("/"));
-    if(action == "" || action == undefined || action == null)
+    var action = url.split("/")[2];
+    console.log(action);
+    if(action == null)
     {
         action = "index";
     }
+    else
+    {
+        if(action.split("?")[0] != undefined)
+        {
+            action = action.split("?")[0];
+        }
+    }
+   
+    
+    
     const contr = require("../Controller/"+capitalizeFirstLetter(controller)+"Controller")["default"]
     controller = new contr(req,res);
  
